@@ -28,7 +28,7 @@ Route::get('/dashboard', function () {
 Route::middleware(['auth', 'accessAdminPanel'])->prefix('admin')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
     Route::resource('/roles', RoleController::class);
-    Route::prefix('user')->group(function() {
+    Route::prefix('users')->group(function() {
         Route::get('/', [UserController::class, 'index'])->name('admin.user.index');
         Route::post('/', [UserController::class, 'store'])->name('admin.user.store');
         Route::post('/edit/{id}', [UserController::class, 'update'])->name('admin.user.update');

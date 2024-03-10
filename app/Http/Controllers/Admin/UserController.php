@@ -13,15 +13,16 @@ use Spatie\Permission\Models\Permission;
 class UserController extends Controller
 {
     public function __construct () {
-        $this->middleware("permission:config('global.user_permissions.view_users')")->only('index');
-        $this->middleware("permission:config('global.user_permissions.create_user')")->only('store');
-        $this->middleware("permission:config('global.user_permissions.update_user')")->only('update');
-        $this->middleware("permission:config('global.user_permissions.delete_user')")->only('delete');
+        $this->middleware('permission:'.config('global.user_permissions.view_users'))->only('index');
+        $this->middleware('permission:'.config('global.user_permissions.create_user'))->only('store');
+        $this->middleware('permission:'.config('global.user_permissions.update_user'))->only('update');
+        $this->middleware('permission:'.config('global.user_permissions.delete_user'))->only('delete');
     }
 
     public function index() {
         $users = User::orderBy('id', 'ASC')->paginate(20);
-        return view('admin.user.index', compact('users'));
+        $allRoles = Role::all();
+        return view('admin.user.index', compact('users', 'allRoles'));
     }
 
     public function store(Request $request) {
@@ -54,7 +55,6 @@ class UserController extends Controller
     public function update(Request $request, $id) {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
-            // 'password' => ['required', Rules\Password::defaults()],
             'phone' => ['required', 'string', 'regex:/^[0-9]{10}+$/'],
         ]);
 
@@ -63,8 +63,17 @@ class UserController extends Controller
             'phone' => $request->phone,
         ];
 
+        if($request->accessAdminPanel == 'true') {
+            $dataUserUpdate['access_admin_panel'] = true;
+        }
+
+        if($request->accessAdminPanel == 'false') {
+            $dataUserUpdate['access_admin_panel'] = false;
+        }
+
         $user = User::where('id',$id)->first();
         $user->update($dataUserUpdate);
+        $user->syncRoles($request->roleUser);
 
         return response('Cập nhật thông tin người dùng thành công', 200);
     }

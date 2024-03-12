@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,6 +29,7 @@ Route::get('/dashboard', function () {
 Route::middleware(['auth', 'accessAdminPanel'])->prefix('admin')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
     Route::resource('/roles', RoleController::class);
+    Route::resource('/category', CategoryController::class);
     Route::prefix('users')->group(function() {
         Route::get('/', [UserController::class, 'index'])->name('admin.user.index');
         Route::post('/', [UserController::class, 'store'])->name('admin.user.store');

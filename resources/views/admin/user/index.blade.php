@@ -267,7 +267,8 @@
                                 Swal.fire({
                                     title: "Xóa thành công !",
                                     text: "Thông tin đã được xóa !",
-                                    icon: "success"
+                                    icon: "success",
+                                    showConfirmButton: false,
                                 });
                                 setTimeout(function(){
                                     location.reload();

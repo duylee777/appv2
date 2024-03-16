@@ -93,6 +93,52 @@ class PermissionSeeder extends Seeder
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ],
+
+            //Unit
+            [
+                'name' => config('global.unit_permissions.view_units'),
+                'guard_name' => 'web',
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+            [
+                'name' => config('global.unit_permissions.create_unit'),
+                'guard_name' => 'web',
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+            [
+                'name' => config('global.unit_permissions.delete_unit'),
+                'guard_name' => 'web',
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+
+            //Brand
+            [
+                'name' => config('global.brand_permissions.view_brands'),
+                'guard_name' => 'web',
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+            [
+                'name' => config('global.brand_permissions.create_brand'),
+                'guard_name' => 'web',
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+            [
+                'name' => config('global.brand_permissions.update_brand'),
+                'guard_name' => 'web',
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+            [
+                'name' => config('global.brand_permissions.delete_brand'),
+                'guard_name' => 'web',
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
         ]);
 
     }

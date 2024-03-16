@@ -34,11 +34,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
 <script src="{{asset('../assets/admin/ckeditor/ckeditor.js')}}"></script>
 <script>
-    function closeBox(e) {
-        console.log(e);
-        // var box = document.getElementsByClassName('msgbox');
-        // box.classList.remove('flex');
-        // box.classList.add('hidden');
+    function closeBox() {
+        var box = document.getElementById('msgbox');
+        box.classList.remove('flex');
+        box.classList.add('hidden');
     }
     $(document).ready(function () {
         $('.ckeditor').ckeditor();

@@ -27,5 +27,18 @@
             'update_category' => "Cập nhật danh mục",
             'delete_category' => "Xóa danh mục",
         ],
+
+        'unit_permissions' => [
+            'view_units' => "Xem danh sách đơn vị tính",
+            'create_unit' => "Thêm mới đơn vị tính",
+            'delete_unit' => "Xóa đơn vị tính",
+        ],
+
+        'brand_permissions' => [
+            'view_brands' => "Xem danh sách thương hiệu",
+            'create_brand' => "Thêm mới thương hiệu",
+            'update_brand' => "Cập nhật thương hiệu",
+            'delete_brand' => "Xóa thương hiệu",
+        ],
     ];
 ?>

@@ -13,7 +13,7 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     @if(auth()->user()->access_admin_panel == true)
-                        <x-nav-link :href="route('tag')">
+                        <x-nav-link :href="route('admin.dashboard')">
                             Trang quản trị
                         </x-nav-link>
                     @endif

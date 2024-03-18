@@ -21,7 +21,7 @@
                 </button>
             </div>
             <!-- Create modal body -->
-            <form class="update-role-{{$role->id}} p-4" data-route="{{ route('roles.update', $role->id) }}" method="POST" class="p-4 md:p-5">
+            <form class="update-role-{{$role->id}} p-4" data-route="{{ route('role.update', $role->id) }}" method="POST" class="p-4 md:p-5">
                 @csrf
                 @method('PUT')
                 <div class="grid gap-4 mb-4 grid-cols-2">

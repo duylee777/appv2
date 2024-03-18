@@ -10,10 +10,10 @@ class BrandController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('permission:'.config('global.brand_permissions.view_brands'));
-        $this->middleware('permission:'.config('global.brand_permissions.create_brand'));
-        $this->middleware('permission:'.config('global.brand_permissions.update_brand'));
-        $this->middleware('permission:'.config('global.brand_permissions.delete_brand'));
+        $this->middleware('permission:'.config('global.brand_permissions.view_brands'))->only('index');
+        $this->middleware('permission:'.config('global.brand_permissions.create_brand'))->only('store');
+        $this->middleware('permission:'.config('global.brand_permissions.update_brand'))->only('update');
+        $this->middleware('permission:'.config('global.brand_permissions.delete_brand'))->only('destroy');
     }
     /**
      * Display a listing of the resource.

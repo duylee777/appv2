@@ -206,7 +206,7 @@
 
                 $.ajax({
                     type: 'POST',
-                    url: "users/edit/"+id,
+                    url: "user/edit/"+id,
                     data: dataUserUpdate,
                     success: function(results) {
                         Swal.fire({
@@ -259,7 +259,7 @@
                     if (result.isConfirmed) {
                         $.ajax({
                             type: 'POST',
-                            url: "users/delete/"+id,
+                            url: "user/delete/"+id,
                             data: {
                                 "id": id,
                             },

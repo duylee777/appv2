@@ -22,7 +22,7 @@
                 </button>
             </div>
             <!-- Create modal body -->
-            <form data-route="{{ route('roles.store') }}" method="POST" class="p-4 md:p-5">
+            <form data-route="{{ route('role.store') }}" method="POST" class="p-4 md:p-5">
                 @csrf
                 <div class="grid gap-4 mb-4 grid-cols-2">
                     <div class="col-span-2">

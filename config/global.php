@@ -40,5 +40,27 @@
             'update_brand' => "Cập nhật thương hiệu",
             'delete_brand' => "Xóa thương hiệu",
         ],
+
+        'discount_permissions' => [
+            'view_discounts' => "Xem danh sách mã giảm giá",
+            'create_discount' => "Thêm mới mã giảm giá",
+            'update_discount' => "Cập nhật mã giảm giá",
+            'delete_discount' => "Xóa mã giảm giá",
+        ],
+
+        'inventory_permissions' => [
+            'view_inventories' => "Xem danh sách kho",
+            'create_inventory' => "Nhập sản phẩm vào kho",
+            'update_inventory' => "Cập nhật số lượng sản phẩm trong kho",
+            'delete_inventory' => "Xóa sản phẩm trong kho",
+        ],
+
+        'product_permissions' => [
+            'view_products' => "Xem danh sách sản phẩm",
+            'create_product' => "Thêm mới sản phẩm",
+            'update_product' => "Cập nhật sản phẩm",
+            'delete_product' => "Xóa sản phẩm",
+        ],
+
     ];
 ?>

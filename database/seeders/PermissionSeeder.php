@@ -139,7 +139,84 @@ class PermissionSeeder extends Seeder
                 'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ],
-        ]);
 
+            //Discount
+            [
+                'name' => config('global.discount_permissions.view_discounts'),
+                'guard_name' => 'web',
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+            [
+                'name' => config('global.discount_permissions.create_discount'),
+                'guard_name' => 'web',
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+            [
+                'name' => config('global.discount_permissions.update_discount'),
+                'guard_name' => 'web',
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+            [
+                'name' => config('global.discount_permissions.delete_discount'),
+                'guard_name' => 'web',
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+
+            //Inventory
+            [
+                'name' => config('global.inventory_permissions.view_inventories'),
+                'guard_name' => 'web',
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+            [
+                'name' => config('global.inventory_permissions.create_inventory'),
+                'guard_name' => 'web',
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+            [
+                'name' => config('global.inventory_permissions.update_inventory'),
+                'guard_name' => 'web',
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+            [
+                'name' => config('global.inventory_permissions.delete_inventory'),
+                'guard_name' => 'web',
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+
+            //Product
+            [
+                'name' => config('global.product_permissions.view_products'),
+                'guard_name' => 'web',
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+            [
+                'name' => config('global.product_permissions.create_product'),
+                'guard_name' => 'web',
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+            [
+                'name' => config('global.product_permissions.update_product'),
+                'guard_name' => 'web',
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+            [
+                'name' => config('global.product_permissions.delete_product'),
+                'guard_name' => 'web',
+                'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+                'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            ],
+        ]);
     }
 }

@@ -10,9 +10,9 @@ class UnitController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('permission:'.config('global.unit_permissions.view_units'));
-        $this->middleware('permission:'.config('global.unit_permissions.create_unit'));
-        $this->middleware('permission:'.config('global.unit_permissions.delete_unit'));
+        $this->middleware('permission:'.config('global.unit_permissions.view_units'))->only('index');
+        $this->middleware('permission:'.config('global.unit_permissions.create_unit'))->only('store');
+        $this->middleware('permission:'.config('global.unit_permissions.delete_unit'))->only('destroy');
     }
     /**
      * Display a listing of the resource.

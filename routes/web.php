@@ -9,6 +9,9 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\UnitController;
 use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\DiscountController;
+use App\Http\Controllers\Admin\InventoryController;
+use App\Http\Controllers\Admin\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,11 +33,14 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 Route::middleware(['auth', 'accessAdminPanel'])->prefix('admin')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
-    Route::resource('/roles', RoleController::class);
+    Route::resource('/role', RoleController::class);
     Route::resource('/category', CategoryController::class);
     Route::resource('/unit', UnitController::class);
     Route::resource('/brand', BrandController::class);
-    Route::prefix('users')->group(function() {
+    Route::resource('/discount', DiscountController::class);
+    Route::resource('/inventory', InventoryController::class);
+    Route::resource('/product', ProductController::class);
+    Route::prefix('user')->group(function() {
         Route::get('/', [UserController::class, 'index'])->name('admin.user.index');
         Route::post('/', [UserController::class, 'store'])->name('admin.user.store');
         Route::post('/edit/{id}', [UserController::class, 'update'])->name('admin.user.update');

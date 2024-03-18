@@ -44,10 +44,10 @@ class CategoryController extends Controller
 
     public function __construct()
     {
-        $this->middleware('permission:'.config('global.category_permissions.view_categories'));
-        $this->middleware('permission:'.config('global.category_permissions.create_category'));
-        $this->middleware('permission:'.config('global.category_permissions.update_category'));
-        $this->middleware('permission:'.config('global.category_permissions.delete_category'));
+        $this->middleware('permission:'.config('global.category_permissions.view_categories'))->only('index');
+        $this->middleware('permission:'.config('global.category_permissions.create_category'))->only('store');
+        $this->middleware('permission:'.config('global.category_permissions.update_category'))->only('update');
+        $this->middleware('permission:'.config('global.category_permissions.delete_category'))->only('destroy');
     }
     /**
      * Display a listing of the resource.

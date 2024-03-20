@@ -61,7 +61,7 @@ class CategoryController extends Controller
         }
         $categories = (object)array_unique($newArray);
 
-        return view('admin.category.index', compact('categories'));
+        return view('admin.category.category', compact('categories'));
     }
 
     /**

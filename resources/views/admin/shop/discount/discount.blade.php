@@ -234,12 +234,8 @@
                     });
                     
                 } 
-                // else {
-                //     Swal.fire("Error!", results.message, "error");
-                // }
             });
         });
-
     });
 </script>
 

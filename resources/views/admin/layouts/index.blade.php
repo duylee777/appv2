@@ -10,6 +10,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css"  rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.ckeditor.com/4.22.1/standard/ckeditor.js"></script>
     <title>G1 Admin</title>
     @vite(['resources/css/app.css','resources/js/app.js'])
 </head>
@@ -32,15 +33,16 @@
 </body>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script>
-<script src="{{asset('../assets/admin/ckeditor/ckeditor.js')}}"></script>
+<script src="{{asset('../assets/admin/jquery-ui-1.13.2/jquery-ui.min.js')}}"></script>
+<!-- <script src="{{asset('../admin/ckeditor/ckeditor.js')}}"></script> -->
 <script>
     function closeBox() {
         var box = document.getElementById('msgbox');
         box.classList.remove('flex');
         box.classList.add('hidden');
     }
-    $(document).ready(function () {
-        $('.ckeditor').ckeditor();
-    });
+    // $(document).ready(function () {
+    //     $('.ckeditor').ckeditor();
+    // });
 </script>
 </html>

@@ -57,10 +57,8 @@
                         @if(in_array(config('global.default_roles.super_admin'), $userRole))
                             <select id="role-user-{{$user->id}}" name="role-user-{{$user->id}}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" disabled>
                                 @foreach($allRoles as $role)
-                                    @if(in_array($role->name, $userRole))
+                                    @if($role->name == config('global.default_roles.super_admin'))
                                         <option value="{{$role->name}}" class="font-medium" selected>{{$role->name}}</option>
-                                    @else
-                                        <option value="{{$role->name}}">{{$role->name}}</option>
                                     @endif
                                 @endforeach
                             </select>
@@ -70,7 +68,11 @@
                                     @if(in_array($role->name, $userRole))
                                         <option value="{{$role->name}}" class="font-medium" selected>{{$role->name}}</option>
                                     @else
-                                        <option value="{{$role->name}}">{{$role->name}}</option>
+                                        @if($role->name == config('global.default_roles.super_admin'))
+                                            <option value="{{$role->name}}" hidden>{{$role->name}}</option>
+                                        @else
+                                            <option value="{{$role->name}}">{{$role->name}}</option>
+                                        @endif
                                     @endif
                                 @endforeach
                             </select>

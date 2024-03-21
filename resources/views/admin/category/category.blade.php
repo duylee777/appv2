@@ -43,7 +43,7 @@
                 </div>
 
                 <!-- Search form -->
-                <div class="flex-1">
+                <!-- <div class="flex-1">
                     <form class="flex items-center max-w-lg mx-auto">   
                         <div class="relative w-full"> 
                             <input type="text" id="voice-search" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-4 p-2.5" placeholder="Search Mockups, Logos, Design Templates..." required />
@@ -54,7 +54,7 @@
                             </button>
                         </div>
                     </form>
-                </div>
+                </div> -->
 
                 <div class="flex flex-col flex-shrink-0 space-y-3 md:flex-row md:items-center lg:justify-end md:space-y-0 md:space-x-3"> 
                     <!-- Create main modal -->

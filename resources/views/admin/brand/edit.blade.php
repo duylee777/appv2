@@ -72,7 +72,7 @@
                 <label for="" class="block mb-2 font-semibold text-gray-900">Hình ảnh thương hiệu</label>
                 <div class="p-4 flex flex-col lg:flex-row items-center gap-4 bg-white border border-gray-200 rounded-lg shadow">
                     <div class="w-24 h-24 overflow-hidden flex items-center justify-center rounded-md shadow">
-                        <img id="preview_brand_image" class="w-full" src="{{asset('../storage/brands/'.$brand->id.'/'.$brand->image)}}" alt="Extra large image">
+                        <img id="preview_brand_image" class="w-full" src="{{asset('../storage/brands/'.$brand->slug.'/'.$brand->image)}}" alt="Extra large image">
                     </div>
                     <div class="flex flex-col gap-2">
                         <label class="block text-sm font-medium text-gray-900" for="file_brand_input">Tải tập tin lên</label>

@@ -52,7 +52,9 @@ class BrandController extends Controller
                         'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
                     ]);
         
-                    $imageName = time().'_'.$request->file('image')->getClientOriginalName();
+                    $image = time().'_'.$request->file('image')->getClientOriginalName();
+                    $imageName = pathinfo($image,PATHINFO_FILENAME).'.webp';
+                    // var_dump($imageName);die;
                 }
                 
                 $newBrandData = [
@@ -62,8 +64,9 @@ class BrandController extends Controller
                 ];
                 $newBrand = Brand::create($newBrandData);
         
-                $linkStorage = "/brands/".$newBrand->id;
-                $request->image->move(storage_path('app/public').$linkStorage,$imageName);
+                $linkStorage = "/brands/".$newBrand->slug;
+                $request->image->move(storage_path('app/public').$linkStorage,$image);
+                Parent::webpImage(storage_path('app/public').$linkStorage."/".$image, 90, true);
         
                 return redirect()->route('brand.index')->with(['msg' => 'Đã thêm thương hiệu mới !']);
             }
@@ -107,30 +110,61 @@ class BrandController extends Controller
         }
         else {
             try{
-                $slug = Parent::toSlug($request->name);
-                $updateBrandData = [
-                    "slug" => $slug,
-                    "name" => $request->name,
-                ];
-        
-                if($request->file('image') != null) {
-                    $request->validate([
-                        'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
-                    ]);
-        
-                    $imageName = time().'_'.$request->file('image')->getClientOriginalName();
-                    
-                    $linkStorage = "/brands/".$brand->id;
-                    $request->image->move(storage_path('app/public').$linkStorage,$imageName);
-                    
-                    $updateBrandData["image"] = $imageName;
-        
-                    unlink(storage_path('app/public').'/brands/'.$brand->id.'/'.$brand->image);
+                $updateBrandData = [];
+
+                if(Parent::toSlug($request->name) != $brand->slug) {
+                    $updateBrandData['name'] = $request->name;
+                    $updateBrandData['slug'] = Parent::toSlug($request->name);
+                    // check has file in request
+                    if($request->file('image')) {
+                        $request->validate([
+                            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+                        ]);
+                        $requestImageName = time().'_'.$request->file('image')->getClientOriginalName();
+
+                        $imageNameSaveDB = pathinfo($requestImageName, PATHINFO_FILENAME).'.webp';
+                        $updateBrandData["image"] = $imageNameSaveDB;
+
+                        $linkNewStorage = storage_path('app/public')."/brands/".Parent::toSlug($request->name)."/";
+                        $request->image->move($linkNewStorage, $requestImageName);
+                        // convert file img to .webp img and delete file img
+                        Parent::webpImage($linkNewStorage.$requestImageName, 90, true);
+
+                        // delete current file image, folder with current slug
+                        unlink(storage_path('app/public').'/brands/'.$brand->slug.'/'.$brand->image);
+                        rmdir(storage_path('app/public').'/brands/'.$brand->slug);
+
+                    }
+                    else {
+                        rename(storage_path('app/public').'/brands/'.$brand->slug, storage_path('app/public').'/brands/'.Parent::toSlug($request->name));
+                    }
                 }
-        
-                $brand->update($updateBrandData);
-        
-                return redirect()->route('brand.index')->with(['msg' => 'Cập nhật thương hiệu thành công !']);
+                else {
+                    if($request->file('image')) {
+                        $request->validate([
+                            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
+                        ]);
+                        $requestImageName = time().'_'.$request->file('image')->getClientOriginalName();
+
+                        $imageNameSaveDB = pathinfo($requestImageName, PATHINFO_FILENAME).'.webp';
+                        $updateBrandData["image"] = $imageNameSaveDB;
+
+                        $linkCurrentStorage = storage_path('app/public')."/brands/".$brand->slug."/";
+                        $request->image->move($linkCurrentStorage, $requestImageName);
+                        // convert file img to .webp img and delete file img
+                        Parent::webpImage($linkCurrentStorage.$requestImageName, 90, true);
+
+                        // delete current file image
+                        unlink(storage_path('app/public').'/brands/'.$brand->slug.'/'.$brand->image);
+                    }
+                }
+
+                if(isset($updateBrandData)) {
+                    $brand->update($updateBrandData);
+                    return redirect()->route('brand.index')->with(['msg' => 'Cập nhật thương hiệu thành công !']);
+                }
+
+                return redirect()->route('brand.edit', $brand->id)->with(['error' => 'Không có thông tin cập nhật !']);
             }
             catch(\Exception $e) {
                 return $e->getMessage();
@@ -143,7 +177,7 @@ class BrandController extends Controller
      */
     public function destroy(Brand $brand)
     {
-        $linkStorage = storage_path('app/public').'/brands/'.$brand->id;
+        $linkStorage = storage_path('app/public').'/brands/'.$brand->slug;
         if (is_dir($linkStorage)) {
             unlink($linkStorage.'/'.$brand->image);
             rmdir($linkStorage);

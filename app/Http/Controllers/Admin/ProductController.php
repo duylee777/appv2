@@ -75,19 +75,22 @@ class ProductController extends Controller
                         'thumb' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
                     ]);
 
-                    // $thumbnails = time().'_'.$request->file('thumb')->getClientOriginalName();
-                    $thumbnails = $request->code.'.webp';
+                    $thumbnails = $request->code.'.'.$request->file('thumb')->getClientOriginalExtension();
+                    // $thumbnails = $request->code.'.webp';
                 }
-                $linkStorageThumbnails = "/products/".$request->code."/thumbnails/";
-                $request->thumb->move(storage_path('app/public').$linkStorageThumbnails, $thumbnails);
+                $linkStorageThumbnails = storage_path('app/public')."/products/".$request->code."/thumbnails/";
+                $request->thumb->move($linkStorageThumbnails, $thumbnails);
+                Parent::webpImage($linkStorageThumbnails.$thumbnails, 90, true);
                 
                 $images = [];
                 if($request->hasFile('image')) {
                     foreach($request->file('image') as $imageFile) {
-                        $imageName = time().'_'.$imageFile->getClientOriginalName();
-                        $linkStorageImage = "/products/".$request->code."/image/";
-                        $imageFile->move(storage_path('app/public').$linkStorageImage, $imageName);
-                        $images[] = $imageName;
+                        $requestImageName = time().'_'.$imageFile->getClientOriginalName();
+                        $imageNameSaveDB = pathinfo($requestImageName, PATHINFO_FILENAME).'.webp';
+                        $linkStorageImage = storage_path('app/public')."/products/".$request->code."/image/";
+                        $imageFile->move($linkStorageImage, $requestImageName);
+                        Parent::webpImage($linkStorageImage.$requestImageName, 80, true);
+                        $images[] = $imageNameSaveDB;
                     }
                 }
                 $dataNewProduct['image'] = json_encode($images);
@@ -185,16 +188,18 @@ class ProductController extends Controller
 
             if($request->hasFile('thumb')) {
                 $linkStorage = storage_path('app/public')."/products/".$product->code."/thumbnails/";
-                if (is_dir($linkStorage)) {
+                if (is_dir($linkStorage) && file_exists($linkStorage.'/'.$product->code.'.webp')) {
                     unlink($linkStorage.'/'.$product->code.'.webp');
                 }
 
                 $request->validate([
                     'thumb' => 'required|image|mimes:jpeg,png,jpg,gif,svg,webp|max:2048',
                 ]);
-                $thumbnails = $request->code.'.webp';
-                $linkStorageThumbnails = "/products/".$product->code."/thumbnails/";
-                $request->thumb->move(storage_path('app/public').$linkStorageThumbnails, $thumbnails);
+                // $thumbnails = $product->code.'.webp';
+                $thumbnails = $product->code.'.'.$request->file('thumb')->getClientOriginalExtension();
+                $linkStorageThumbnails = storage_path('app/public')."/products/".$product->code."/thumbnails/";
+                $request->thumb->move($linkStorageThumbnails, $thumbnails);
+                Parent::webpImage($linkStorageThumbnails.$thumbnails, 90, true);
             }
             
 
@@ -209,10 +214,12 @@ class ProductController extends Controller
                 }
 
                 foreach($request->file('image') as $imageFile) {
-                    $imageName = time().'_'.$imageFile->getClientOriginalName();
-                    $linkStorageImage = "/products/".$product->code."/image/";
-                    $imageFile->move(storage_path('app/public').$linkStorageImage, $imageName);
-                    $images[] = $imageName;
+                    $requestImageName = time().'_'.$imageFile->getClientOriginalName();
+                    $imageNameSaveDB = pathinfo($requestImageName, PATHINFO_FILENAME).'.webp';
+                    $linkStorageImage = storage_path('app/public')."/products/".$product->code."/image/";
+                    $imageFile->move($linkStorageImage, $requestImageName);
+                    Parent::webpImage($linkStorageImage.$requestImageName, 80, true);
+                    $images[] = $imageNameSaveDB;
                 }
                 $dataUpdateProduct['image'] = json_encode($images);
             }
@@ -345,7 +352,7 @@ class ProductController extends Controller
 
             $product->update($dataUpdateProduct);
 
-            return redirect()->route('product.edit',$product->id);
+            return redirect()->route('product.edit',$product->id)->with(['msg' => 'Cập nhật thành công !']);
 
         }
         catch(\Exception $e) {

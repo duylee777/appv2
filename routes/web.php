@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\UnitController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\DiscountController;
+use App\Http\Controllers\Admin\ExcelController;
 use App\Http\Controllers\Admin\InventoryController;
 use App\Http\Controllers\Admin\ProductController;
 
@@ -40,6 +41,10 @@ Route::middleware(['auth', 'accessAdminPanel'])->prefix('admin')->group(function
     Route::resource('/discount', DiscountController::class);
     Route::resource('/inventory', InventoryController::class);
     Route::resource('/product', ProductController::class);
+    Route::prefix('/excel')->group(function() {
+        Route::post('/import-products', [ExcelController::class, 'importProducts'])->name('admin.excel.import-products');
+        Route::get('/export-products', [ExcelController::class, 'exportProducts'])->name('admin.excel.export-products');
+    });
     Route::prefix('user')->group(function() {
         Route::get('/', [UserController::class, 'index'])->name('admin.user.index');
         Route::post('/', [UserController::class, 'store'])->name('admin.user.store');

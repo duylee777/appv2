@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('slug');
             $table->longText('description');
             $table->string('origin');
-            $table->string('image');
+            $table->longText('image');
 
             $table->string('document')->nullable();
             $table->string('software')->nullable();

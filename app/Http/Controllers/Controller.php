@@ -23,4 +23,36 @@ class Controller extends BaseController
         $str = preg_replace('/([\s]+)/', '-', $str);
         return $str;
     }
+
+    public static function webpImage($source, $quality = 100, $removeOld = false)
+    {
+        $dir = pathinfo($source, PATHINFO_DIRNAME);
+        $name = pathinfo($source, PATHINFO_FILENAME);
+       
+        $destination = $dir . DIRECTORY_SEPARATOR . $name . '.webp';
+        // var_dump($destination);die;
+        $info = getimagesize($source);
+        // var_dump($info);die;
+        $isAlpha = false;
+        if ($info['mime'] == 'image/jpeg')
+            $image = imagecreatefromjpeg($source);
+        elseif ($isAlpha = $info['mime'] == 'image/gif') {
+            $image = imagecreatefromgif($source);
+        } elseif ($isAlpha = $info['mime'] == 'image/png') {
+            $image = imagecreatefrompng($source);
+        } else {
+            return $source;
+        }
+        if ($isAlpha) {
+            imagepalettetotruecolor($image);
+            imagealphablending($image, true);
+            imagesavealpha($image, true);
+        }
+        imagewebp($image, $destination, $quality);
+
+        if ($removeOld)
+            unlink($source);
+
+        return $destination;
+    }
 }

@@ -70,7 +70,7 @@
                             <th scope="row" class="px-4 py-3 font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $brand->id }}</th>
                             <td class="px-4 py-3">
                                 <div class="w-24 h-24 overflow-hidden flex items-center justify-center rounded-md shadow">
-                                    <img id="" class="w-full" src="{{asset('../storage/brands/'.$brand->id.'/'.$brand->image)}}" alt="Extra large image">
+                                    <img id="" class="w-full" src="{{asset('../storage/brands/'.$brand->slug.'/'.$brand->image)}}" alt="Extra large image">
                                 </div>
                             </td>
                             <td class="px-4 py-3">{{ $brand->name }}</td>

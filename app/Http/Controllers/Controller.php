@@ -30,9 +30,7 @@ class Controller extends BaseController
         $name = pathinfo($source, PATHINFO_FILENAME);
        
         $destination = $dir . DIRECTORY_SEPARATOR . $name . '.webp';
-        // var_dump($destination);die;
         $info = getimagesize($source);
-        // var_dump($info);die;
         $isAlpha = false;
         if ($info['mime'] == 'image/jpeg')
             $image = imagecreatefromjpeg($source);

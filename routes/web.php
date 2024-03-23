@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\DiscountController;
 use App\Http\Controllers\Admin\ExcelController;
 use App\Http\Controllers\Admin\InventoryController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\TagController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +42,7 @@ Route::middleware(['auth', 'accessAdminPanel'])->prefix('admin')->group(function
     Route::resource('/discount', DiscountController::class);
     Route::resource('/inventory', InventoryController::class);
     Route::resource('/product', ProductController::class);
+    Route::resource('/tag', TagController::class);
     Route::prefix('/excel')->group(function() {
         Route::post('/import-products', [ExcelController::class, 'importProducts'])->name('admin.excel.import-products');
         Route::get('/export-products', [ExcelController::class, 'exportProducts'])->name('admin.excel.export-products');
@@ -52,11 +54,6 @@ Route::middleware(['auth', 'accessAdminPanel'])->prefix('admin')->group(function
         Route::post('/delete/{id}', [UserController::class, 'delete'])->name('admin.user.delete');
     });
 
-
-
-    Route::get('/tag', function () {
-        return view('tag');
-    })->name('tag');
 });
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

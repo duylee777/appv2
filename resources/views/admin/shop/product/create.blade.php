@@ -49,7 +49,7 @@
             <!-- Quay lại -->
         </a>
         <div class="flex items-center justify-between flex-1 mb-4">
-            <h2 class="text-black text-2xl font-semibold">Thêm sản phẩm mới</h2>
+            <h2 class="text-blue-600 text-2xl font-semibold">Thêm sản phẩm mới</h2>
 
             <div class="flex items-center gap-2">
                 <a href="{{route('product.create')}}" class="block p-2 shadow-lg rounded-lg bg-white text-red-300 border border-red-300">

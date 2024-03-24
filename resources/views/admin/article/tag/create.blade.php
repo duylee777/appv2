@@ -38,25 +38,37 @@
         </svg>
         Quay lại
     </a>
-    <h2 class=" mx-4 mb-4 text-xl font-bold text-blue-600">Thêm tag mới</h2>
+    <h2 class=" mx-4 mb-4 text-xl font-bold text-blue-600">Thêm thẻ mới</h2>
     <form  method="POST" action="{{ route('tag.store') }}" class="px-4" enctype="multipart/form-data">
         @csrf
-        <div class="flex flex-col gap-4">
-            <div class="sm:col-span-2">
-                <label for="name" class="block mb-2 font-semibold text-gray-900">Tag</label>
-                <input type="text" name="name" id="name" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" placeholder="Nhập tên tag ..." required="">
-            </div>
-            <div class="col-span-2">
-                <div class="flex items-center">
-                    <input id="is_visible"  name="is_visible" type="checkbox" value="1" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
-                    <label for="is_visible" class="ms-2 text-sm font-semibold text-gray-900">Hiển thị cho khách hàng</label>
+        <section class="grid gap-4 grid-cols-1 lg:grid-cols-2">
+            <div class="p-4 mb-4 grid gap-4 grid-cols-1 lg:grid-cols-2 bg-white shadow-md sm:rounded-lg">
+                <div class="col-span-2">
+                    <label for="name" class="block mb-2 font-semibold text-gray-900">Tên thẻ</label>
+                    <input type="text" name="name" id="name" class="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5" placeholder="Nhập tên tag ..." required="">
                 </div>
             </div>
-        </div>
-        <div class="text-right">
-            <button type="submit" class="px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-white bg-blue-700 rounded-lg focus:ring-4 focus:ring-blue-200 hover:bg-blue-800">
-                Tạo tag
+            <div class="">
+                <div class="p-4 mb-4 grid gap-4 grid-cols-1 lg:grid-cols-2 bg-white shadow-md sm:rounded-lg">
+                    <div class="col-span-2">
+                        <div class="flex items-center">
+                            <input id="is_visible"  name="is_visible" type="checkbox" value="1" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500">
+                            <label for="is_visible" class="ms-2 text-sm font-semibold text-gray-900">Hiển thị cho khách hàng</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="flex items-center flex-wrap gap-4">
+            <button type="submit" class="text-white inline-flex items-center bg-green-500 hover:bg-green-700 border-2 border-green-500 hover:border-green-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                <svg class="me-1 -ms-1 w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor">
+                    <path d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V173.3c0-17-6.7-33.3-18.7-45.3L352 50.7C340 38.7 323.7 32 306.7 32H64zm0 96c0-17.7 14.3-32 32-32H288c17.7 0 32 14.3 32 32v64c0 17.7-14.3 32-32 32H96c-17.7 0-32-14.3-32-32V128zM224 288a64 64 0 1 1 0 128 64 64 0 1 1 0-128z"/>
+                </svg>
+                Lưu
             </button>
+            <a href="{{ route('tag.index') }}" type="button" class="btn_cancel text-black inline-flex items-center border-2 bg-white rounded-lg text-sm px-5 py-2.5 text-center">
+                Hủy bỏ
+            </a>
         </div>
     </form>
 </section>

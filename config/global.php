@@ -62,5 +62,19 @@
             'delete_product' => "Xóa sản phẩm",
         ],
 
+        'tag_permissions' => [
+            'view_tags' => "Xem danh sách thẻ",
+            'create_tag' => "Thêm mới thẻ",
+            'update_tag' => "Cập nhật thẻ",
+            'delete_tag' => "Xóa thẻ",
+        ],
+
+        'post_permissions' => [
+            'view_posts' => "Xem danh sách bài viết",
+            'create_post' => "Thêm mới bài viết",
+            'update_post' => "Cập nhật bài viết",
+            'delete_post' => "Xóa bài viết",
+        ],
+
     ];
 ?>

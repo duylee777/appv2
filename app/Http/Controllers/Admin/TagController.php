@@ -8,6 +8,14 @@ use Illuminate\Http\Request;
 
 class TagController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:'.config('global.tag_permissions.view_tags'))->only('index');
+        $this->middleware('permission:'.config('global.tag_permissions.create_tag'))->only('store');
+        $this->middleware('permission:'.config('global.tag_permissions.update_tag'))->only('update');
+        $this->middleware('permission:'.config('global.tag_permissions.delete_tag'))->only('destroy');
+
+    }
     /**
      * Display a listing of the resource.
      */
@@ -65,7 +73,7 @@ class TagController extends Controller
     public function edit($id)
     {
         $tag = Tag::where('id',$id)->first();
-        return view('admin.article.tag.edit', $tag);
+        return view('admin.article.tag.edit', compact('tag'));
     }
 
     /**

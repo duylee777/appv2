@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AgencyController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -45,6 +46,7 @@ Route::middleware(['auth', 'accessAdminPanel'])->prefix('admin')->group(function
     Route::resource('/product', ProductController::class);
     Route::resource('/tag', TagController::class);
     Route::resource('/post', PostController::class);
+    Route::resource('/agency', AgencyController::class);
     Route::prefix('/excel')->group(function() {
         Route::post('/import-products', [ExcelController::class, 'importProducts'])->name('admin.excel.import-products');
         Route::get('/export-products', [ExcelController::class, 'exportProducts'])->name('admin.excel.export-products');
